@@ -1,20 +1,29 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const btnTopo = document.getElementById('btn-topo');
+// javascript.js
+document.addEventListener("DOMContentLoaded", () => {
+  const avatarImg = document.getElementById("avatar");
+  const dropdown = document.getElementById("dropdown-user");
+  const btnTopo = document.getElementById("btn-topo");
 
-    // Mostrar ou esconder botão ao rolar a página
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 200) {
-            btnTopo.style.display = "block";
-        } else {
-            btnTopo.style.display = "none";
-        }
+  // Dropdown avatar (apenas abrir/fechar menu)
+  if (avatarImg && dropdown) {
+    avatarImg.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle("show");
     });
 
-    // Scroll suave ao topo
-    btnTopo.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+    document.addEventListener("click", () => {
+      dropdown.classList.remove("show");
     });
+  }
+
+  // Botão voltar ao topo
+  if (btnTopo) {
+    window.addEventListener("scroll", () => {
+      btnTopo.style.display = window.scrollY > 200 ? "block" : "none";
+    });
+
+    btnTopo.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 });
